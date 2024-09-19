@@ -1,26 +1,23 @@
 from rest_framework import generics
-from orders.models import Order
-from orders.serializers import OrderSerializer
+from .models import Order
+from .serializers import OrderSerializer
 
-
-
-class OrdersCreateListView(generics.ListCreateAPIView): 
+class OrderCreateView(generics.CreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
-    # def create(self, request, *args, **kwargs):
-    #     # Exibe os dados da requisição recebidos na API
-    #     print(f"Dados recebidos para criar pedido: {request.data}")
-        
-    #     # Você pode adicionar validações ou qualquer outra lógica aqui
-    #     return super().create(request, *args, **kwargs)
+class OrderListView(generics.ListAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 
-    # def list(self, request, *args, **kwargs):
-    #     # Exibe os dados da requisição, se necessário
-    #     print(f"Listando pedidos para o usuário: {request.user}")
-    #     return super().list(request, *args, **kwargs)
+class OrderDetailView(generics.RetrieveAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 
+class OrderUpdateView(generics.UpdateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 
-class OrdersRetriveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+class OrderDeleteView(generics.DestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
